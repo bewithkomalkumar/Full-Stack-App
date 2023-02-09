@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
 import { myContext } from "../Context/AppContext";
 
 function ProductDetails() {
   const [data, setData] = useState([]);
   const { id } = useParams();
   const { status } = useContext(myContext);
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get(`http://localhost:3030/singleProduct/${id}`).then((res) => {
       console.log(res);
@@ -15,19 +16,23 @@ function ProductDetails() {
   }, []);
 
   const handleAddtocart = () => {
-    const token = localStorage.getItem("loginToken");
-    if (token) {
-      axios
-        .patch(
-          `http://localhost:3030/cart`,
-          { productid: id },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then((res) => {
-          alert(res.data.message);
-        });
+    if (!status.isLoggedIn) {
+      navigate("/login");
+    } else {
+      const token = localStorage.getItem("loginToken");
+      if (token) {
+        axios
+          .patch(
+            `http://localhost:3030/cart`,
+            { productid: id },
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
+          .then((res) => {
+            alert(res.data.message);
+          });
+      }
     }
   };
   return (

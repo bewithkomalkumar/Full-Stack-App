@@ -10,6 +10,8 @@ import TradeMills from "../Pages/TradeMills";
 import SpinBikes from "../Pages/SpinBikes";
 import Cart from "../Pages/Cart";
 import ProductDetails from "../Pages/ProductDetails";
+import Payment from "../Pages/Payment";
+import PrivateForCart from "../Componet/Navbar/PrivateRouter/PrivateForCart";
 function Allroutes() {
   return (
     <div>
@@ -36,8 +38,24 @@ function Allroutes() {
         <Route path={"/Just_Launched"} element={<JustLaunched />} />
         <Route path={"/trademills"} element={<TradeMills />} />
         <Route path="spinbikes" element={<SpinBikes />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/cart"
+          element={
+            <PrivateForCart>
+              <Cart />
+            </PrivateForCart>
+          }
+        />
         <Route path="/productdetails/:id" element={<ProductDetails />} />
+        <Route
+          path="/payment"
+          element={
+            <PrivateForCart>
+              <Payment />
+            </PrivateForCart>
+          }
+        />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );

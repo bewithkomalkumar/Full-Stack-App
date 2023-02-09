@@ -1,48 +1,78 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { myContext } from "../../Context/AppContext";
+import logo from "./10001.png";
 function Navbar() {
   const { toggleLoggedIn, status, makeUserName } = useContext(myContext);
+  const ref = useRef(null);
 
   const Logout = () => {
     localStorage.removeItem("loginToken");
     makeUserName("", {});
     toggleLoggedIn();
   };
+  const handleHamberger = () => {
+    if (ref.current.style.display == "none") {
+      ref.current.style.display = "flex";
+    } else {
+      ref.current.style.display = "none";
+    }
+  };
   return (
-    <div className="Navbar">
-      <Link to="/">
-        <img src="./product_page/10001.png" alt="image" />
-      </Link>
+    <>
+      <div className="Navbar">
+        <button onClick={handleHamberger} className="hamburgerBtn">
+          =
+        </button>
 
-      <Link to="Just_Launched">Just Launched</Link>
-      <Link to="trademills">Trade Mills</Link>
-      <Link to="spinbikes">Spin Bikes</Link>
-      <Link to="cycles">Cycles</Link>
+        <Link to="/">
+          <img src={logo} alt="image" />
+        </Link>
 
-      {status.isLoggedIn ? (
-        <>
-          <p>
-            <strong>Hi, </strong>
-            {status.username}
-          </p>
-          <Link to="/cart">
-            <p>Cart</p>
-          </Link>
-          <button onClick={Logout}>Logout</button>
-        </>
-      ) : (
-        <div>
-          <Link to={"/login"}>
-            <button>Login</button>
-          </Link>
-          <Link to={"/register"}>
-            <button>Sign up</button>
-          </Link>
-        </div>
-      )}
-    </div>
+        <Link to="Just_Launched" className="desktop">
+          Just Launched
+        </Link>
+        <Link to="trademills" className="desktop">
+          Trade Mills
+        </Link>
+        <Link to="spinbikes" className="desktop">
+          Spin Bikes
+        </Link>
+        <Link to="cycles" className="desktop">
+          Cycles
+        </Link>
+
+        {status.isLoggedIn ? (
+          <>
+            <p>
+              <strong>Hi, </strong>
+              {status.username}
+            </p>
+            <Link to="/cart">
+              <p>Cart</p>
+            </Link>
+            <button onClick={Logout}>Logout</button>
+          </>
+        ) : (
+          <div>
+            <Link to={"/login"}>
+              <button>Login</button>
+            </Link>
+            <Link to={"/register"}>
+              <button>Sign up</button>
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <div className="navrespnsive" ref={ref}>
+        <Link to="Just_Launched">Just Launched</Link>
+        <Link to="trademills">Trade Mills</Link>
+        <Link to="spinbikes">Spin Bikes</Link>
+        <Link to="cycles">Cycles</Link>
+      </div>
+    </>
   );
 }
 

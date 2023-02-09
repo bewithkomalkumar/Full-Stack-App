@@ -41,6 +41,7 @@ function Login() {
           localStorage.setItem("loginToken", res.data.token);
           makeUserName(res.data.data.name);
           toggleLoggedIn();
+          // navigate(-1);
         } else {
           alert(res.data.message);
         }

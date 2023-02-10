@@ -7,10 +7,13 @@ function SpinBikes() {
   const [sort, setSort] = useState("null");
 
   useEffect(() => {
-    axios.get(`http://localhost:3030/spinbike?sort=${sort}`).then((res) => {
-      console.log(res);
-      setData(res.data.data);
-    });
+    setData([]);
+    axios
+      .get(`https://expensive-train-tuna.cyclic.app/spinbike?sort=${sort}`)
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      });
   }, [sort]);
 
   return (

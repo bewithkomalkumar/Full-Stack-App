@@ -17,6 +17,7 @@ const {
   EmptyCart,
   showUserCart,
   getSingleProduct,
+  deleteSigleProductFormCart,
 } = require("./Controller/auth");
 
 const app = express();
@@ -30,6 +31,7 @@ app.use("/auth", authRouter);
 app.patch("/cart", validateAddtoCart);
 app.get("/cart/:userid", showUserCart);
 app.get("/singleProduct/:id", getSingleProduct);
+app.patch("/deteleSingleItem", deleteSigleProductFormCart);
 app.patch("/orderplace", EmptyCart);
 app.get("/Just_Launched", async (req, res) => {
   try {

@@ -17,7 +17,7 @@ function Register() {
     event.preventDefault();
     // console.log(name, gender, email, password);
     axios
-      .post("http://localhost:3030/auth/register", {
+      .post("https://expensive-train-tuna.cyclic.app/auth/register", {
         name,
         email,
         gender,

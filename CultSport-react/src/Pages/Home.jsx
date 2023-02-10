@@ -9,10 +9,13 @@ function Home() {
   const [sort, setSort] = useState("null");
   const { status } = useContext(myContext);
   useEffect(() => {
-    axios.get(`http://localhost:3030/product?sort=${sort}`).then((res) => {
-      console.log(res);
-      setData(res.data.data);
-    });
+    setData([]);
+    axios
+      .get(`https://expensive-train-tuna.cyclic.app/product?sort=${sort}`)
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      });
   }, [sort]);
 
   return (

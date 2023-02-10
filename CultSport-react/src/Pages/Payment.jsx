@@ -20,7 +20,7 @@ function Payment() {
       const token = localStorage.getItem("loginToken");
       if (token) {
         axios
-          .patch(`http://localhost:3030/orderplace`, "", {
+          .patch(`https://expensive-train-tuna.cyclic.app/orderplace`, "", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {

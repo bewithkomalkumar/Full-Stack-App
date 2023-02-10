@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import ButtonForCart from "./ButtonForCart";
 
-function CardforcCart({ data }) {
+function CardforcCart(props) {
+  const { data, setAmount, total, changeData } = props;
   return (
     <div className="ContainerForcartcard">
-      {data.map((elem) => {
+      {data.map((elem, index) => {
         return (
-          <div id="cartcard">
+          <div id="cartcard" key={elem._id}>
             <img src={elem.thumbnail} alt="aa" />
+
             <div className="detailsforcartcard">
               <h3>{elem.cname}</h3>
               <p>{elem.title}</p>
@@ -17,11 +20,14 @@ function CardforcCart({ data }) {
                 <p>{elem.discount} % off</p>
               </div>
             </div>
-            <div className="quantiny">
-              <button>-</button>
-              <p>Quantity</p>
-              <button>+</button>
-            </div>
+            <ButtonForCart
+              data={data}
+              elem={elem}
+              setAmount={setAmount}
+              total={total}
+              changeData={changeData}
+              index={index}
+            />
           </div>
         );
       })}

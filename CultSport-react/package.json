@@ -2,6 +2,7 @@
   "name": "cultsport",
   "version": "0.1.0",
   "private": true,
+  "Homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -9,7 +9,7 @@ function JustLaunched() {
   const { status } = useContext(myContext);
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/Just_Launched?sort=${sort}`)
+      .get(`https://expensive-train-tuna.cyclic.app/Just_Launched?sort=${sort}`)
       .then((res) => {
         console.log(res);
         setData(res.data.data);

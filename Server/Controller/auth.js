@@ -221,6 +221,36 @@ const getSingleProduct = async (req, res) => {
     res.status(500).send({ message: "error" });
   }
 };
+const deleteSigleProductFormCart = async (req, res) => {
+  const authorization = req.headers["authorization"];
+  console.log(authorization);
+  const token = authorization.split(" ").pop();
+  // console.log(token);
+  if (token) {
+    try {
+      jwt.verify(token, secret);
+    } catch (error) {
+      return res.status(401).send("Invalid token");
+    }
+
+    let user = jwt.decode(token);
+
+    user = await User.findOne({ email: user.email });
+    console.log(user.cart, req.body.productid);
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i] === req.body.productid) {
+        user.cart.splice(i, 1);
+        break;
+      }
+    }
+    await User.findByIdAndUpdate(user._id, {
+      cart: user.cart,
+    });
+    const updated = await User.findOne({ _id: user._id });
+    return res.send({ message: "Item Removed from cart", data: updated });
+  }
+  res.send({ message: "someting went wrong" });
+};
 module.exports = {
   test,
   registerUser,
@@ -231,4 +261,5 @@ module.exports = {
   EmptyCart,
   showUserCart,
   getSingleProduct,
+  deleteSigleProductFormCart,
 };

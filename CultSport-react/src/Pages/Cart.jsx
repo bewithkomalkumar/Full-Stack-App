@@ -11,23 +11,32 @@ function Cart() {
   const [total, setTotal] = useState(0);
   const [total2, setTotal2] = useState(0);
   const { status, changeTotal } = useContext(myContext);
+  const [force, setForce] = useState(false);
   useEffect(() => {
-    axios.get(`http://localhost:3030/cart/${status.user._id}`).then((res) => {
-      console.log(res);
-
-      setData(res.data.data);
-      setAmount(res.data.data);
-    });
+    setData([]);
+    axios
+      .get(`https://expensive-train-tuna.cyclic.app/cart/${status.user._id}`)
+      .then((res) => {
+        console.log(res);
+        setAmount(res.data.data);
+      });
   }, []);
+
   const setAmount = (data) => {
+    setData((prev) => data);
     const totaltemp = data.reduce((acc, elem) => {
       return acc + parseInt(elem.price);
     }, 0);
-    setTotal((prev) => totaltemp);
-    setTotal2((prev) => totaltemp - 50);
+    setAmount1(totaltemp);
+  };
+  const setAmount1 = (totaltemp, anyprice = 0) => {
+    setTotal((prev) => totaltemp + anyprice);
+    setTotal2((prev) => totaltemp + anyprice - 50);
   };
   changeTotal(total2);
-  // console.log(total2);
+  const changeData = (data) => {
+    setData(data);
+  };
   return (
     <div className="cartContainer">
       {data.length === 0 ? (
@@ -37,8 +46,12 @@ function Cart() {
         </div>
       ) : (
         <>
-          {" "}
-          <CardforcCart data={data} />
+          <CardforcCart
+            data={data}
+            setAmount={setAmount1}
+            total={total}
+            changeData={changeData}
+          />
           <div>
             <div>
               <div>

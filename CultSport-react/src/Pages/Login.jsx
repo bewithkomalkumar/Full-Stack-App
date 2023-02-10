@@ -12,9 +12,10 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("loginToken");
+
     if (token) {
       axios
-        .get("http://localhost:3030/auth/getLoggedIn", {
+        .get("https://expensive-train-tuna.cyclic.app/auth/getLoggedIn", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
@@ -22,7 +23,7 @@ function Login() {
             //localStorage.setItem("loginToken", res.data.token);
             makeUserName(res.data.data.name, res.data.data);
             toggleLoggedIn();
-            navigate(-1);
+            // navigate(-1);
           } else {
             alert(res.data.message);
           }
@@ -34,7 +35,10 @@ function Login() {
     event.preventDefault();
     console.log(email, password);
     axios
-      .post("http://localhost:3030/auth/login", { email, password })
+      .post("https://expensive-train-tuna.cyclic.app/auth/login", {
+        email,
+        password,
+      })
       .then((res) => {
         //console.log(res);
         if (res.data.message === "Login Sucessfull") {

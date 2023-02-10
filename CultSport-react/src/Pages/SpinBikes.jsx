@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Componet/Navbar/cards/Card";
+import Card from "../Componet/cards/Card";
 import axios from "axios";
 
 function SpinBikes() {

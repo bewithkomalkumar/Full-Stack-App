@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import loading from "../../Loading_icon.gif";
+import loading from "../Loading_icon.gif";
 
 function Card({ data }) {
   return (

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import Card from "../Componet/Navbar/cards/Card";
+import Card from "../Componet/cards/Card";
 import { myContext } from "../Context/AppContext";
 import Login from "../Pages/Login";
 function JustLaunched() {
@@ -8,6 +8,7 @@ function JustLaunched() {
   const [sort, setSort] = useState("null");
   const { status } = useContext(myContext);
   useEffect(() => {
+    setData([]);
     axios
       .get(`https://expensive-train-tuna.cyclic.app/Just_Launched?sort=${sort}`)
       .then((res) => {

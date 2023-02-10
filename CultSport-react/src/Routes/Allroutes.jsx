@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
-import PrivateRouter from "../Componet/Navbar/PrivateRouter/PrivateRouter";
+import PrivateRouter from "../Componet/PrivateRouter/PrivateRouter";
 import Home from "../Pages/Home";
 import Cycles from "../Pages/Cycles";
 import JustLaunched from "../Pages/JustLaunched";
@@ -11,7 +11,7 @@ import SpinBikes from "../Pages/SpinBikes";
 import Cart from "../Pages/Cart";
 import ProductDetails from "../Pages/ProductDetails";
 import Payment from "../Pages/Payment";
-import PrivateForCart from "../Componet/Navbar/PrivateRouter/PrivateForCart";
+import PrivateForCart from "../Componet/PrivateRouter/PrivateForCart";
 function Allroutes() {
   return (
     <div>

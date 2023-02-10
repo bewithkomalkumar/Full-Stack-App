@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ButtonForCart from "./ButtonForCart";
 
 function CardforcCart(props) {
-  const { data, setAmount, total, changeData } = props;
+  const { data, setAmount, total, changeData, changeForce } = props;
   return (
     <div className="ContainerForcartcard">
       {data.map((elem, index) => {
@@ -27,6 +27,7 @@ function CardforcCart(props) {
               total={total}
               changeData={changeData}
               index={index}
+              changeForce={changeForce}
             />
           </div>
         );

@@ -8,7 +8,7 @@ import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { toggleLoggedIn, makeUserName } = useContext(myContext);
+  const { toggleLoggedIn, makeUserName, changeUser_id } = useContext(myContext);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("loginToken");
@@ -21,7 +21,9 @@ function Login() {
         .then((res) => {
           if (res.data.message === "Login Sucessfull") {
             //localStorage.setItem("loginToken", res.data.token);
+            console.log(res);
             makeUserName(res.data.data.name, res.data.data);
+            changeUser_id(res.data.data._id);
             toggleLoggedIn();
             // navigate(-1);
           } else {
@@ -40,10 +42,11 @@ function Login() {
         password,
       })
       .then((res) => {
-        //console.log(res);
+        console.log(res);
         if (res.data.message === "Login Sucessfull") {
           localStorage.setItem("loginToken", res.data.token);
-          makeUserName(res.data.data.name);
+          makeUserName(res.data.data.name, res.data.data);
+          changeUser_id(res.data.data._id);
           toggleLoggedIn();
           // navigate(-1);
         } else {

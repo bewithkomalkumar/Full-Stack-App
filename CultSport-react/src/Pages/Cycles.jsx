@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Card from "../Componet/Navbar/cards/Card";
+import Card from "../Componet/cards/Card";
 import axios from "axios";
 import { myContext } from "../Context/AppContext";
 
@@ -8,6 +8,7 @@ function Cycles() {
   const [sort, setSort] = useState("null");
 
   useEffect(() => {
+    setData([]);
     axios
       .get(`https://expensive-train-tuna.cyclic.app/cycle?sort=${sort}`)
       .then((res) => {

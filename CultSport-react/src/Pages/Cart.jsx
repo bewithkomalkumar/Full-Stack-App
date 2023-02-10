@@ -3,27 +3,36 @@ import { myContext } from "../Context/AppContext";
 import Login from "./Login";
 import axios from "axios";
 
-import CardforcCart from "../Componet/Navbar/cards/CardforCart";
+import CardforcCart from "../Componet/cards/CardforCart";
 import { Link } from "react-router-dom";
 
 function Cart() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [total2, setTotal2] = useState(0);
-  const { status, changeTotal } = useContext(myContext);
+  const { status, changeTotal, user_id } = useContext(myContext);
   const [force, setForce] = useState(false);
   useEffect(() => {
     setData([]);
-    axios
-      .get(`https://expensive-train-tuna.cyclic.app/cart/${status.user._id}`)
-      .then((res) => {
-        console.log(res);
-        setAmount(res.data.data);
-      });
-  }, []);
+    console.log(user_id);
+    if (user_id) {
+      axios
+        .get(`https://expensive-train-tuna.cyclic.app/cart/${user_id}`)
+        .then((res) => {
+          console.log(res);
+          setData(res.data.data);
+          setAmount(res.data.data);
+
+          const totaltemp = res.data.data.reduce((acc, elem) => {
+            return acc + parseInt(elem.price);
+          }, 0);
+          setTotal((prev) => totaltemp);
+          setTotal2((prev) => totaltemp - 50);
+        });
+    }
+  }, [force]);
 
   const setAmount = (data) => {
-    setData((prev) => data);
     const totaltemp = data.reduce((acc, elem) => {
       return acc + parseInt(elem.price);
     }, 0);
@@ -37,9 +46,12 @@ function Cart() {
   const changeData = (data) => {
     setData(data);
   };
+  const changeForce = () => {
+    force ? setForce((prev) => false) : setForce((prev) => true);
+  };
   return (
     <div className="cartContainer">
-      {data.length === 0 ? (
+      {data.length == 0 ? (
         <div style={{ textAlign: "center" }}>
           <h2>Cart is Empty !</h2>
           <p>Lets buy somthing</p>
@@ -51,6 +63,7 @@ function Cart() {
             setAmount={setAmount1}
             total={total}
             changeData={changeData}
+            changeForce={changeForce}
           />
           <div>
             <div>

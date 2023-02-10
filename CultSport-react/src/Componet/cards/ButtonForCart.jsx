@@ -1,7 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-function ButtonForCart({ elem, setAmount, total, changeData, data, index }) {
+function ButtonForCart({
+  elem,
+  setAmount,
+  total,
+  changeData,
+  data,
+  index,
+  changeForce,
+}) {
   const [quant, setQuant] = useState(1);
   const [state, setState] = useState(false);
   elem.quantity = quant;
@@ -22,10 +30,11 @@ function ButtonForCart({ elem, setAmount, total, changeData, data, index }) {
           .then((res) => {
             console.log(res);
             alert(res.data.message);
-            data.splice(index, 1);
-            changeData(data);
-            console.log(data);
-            window.location.reload();
+            changeForce();
+            // data.splice(index, 1);
+            // changeData(data);
+            // console.log(data);
+            //window.location.reload();
           });
       }
     } else {

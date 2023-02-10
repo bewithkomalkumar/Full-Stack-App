@@ -4,7 +4,7 @@ import Navbar from "./Componet/Navbar/Navbar";
 import Allroutes from "./Routes/Allroutes";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "./Componet/Navbar/cards/Card";
+import Card from "./Componet/cards/Card";
 
 function App() {
   return (

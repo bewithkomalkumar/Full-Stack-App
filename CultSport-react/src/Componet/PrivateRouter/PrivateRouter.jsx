@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { myContext } from "../../../Context/AppContext";
+import { myContext } from "../../Context/AppContext";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const PrivateRouter = (props) => {

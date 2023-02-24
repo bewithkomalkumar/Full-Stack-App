@@ -6,6 +6,7 @@ import loading from "../Componet/Loading_icon.gif";
 
 function ProductDetails() {
   const [data, setData] = useState([]);
+  const [btn, setBtn] = useState(false);
   const { id } = useParams();
   const { status } = useContext(myContext);
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function ProductDetails() {
     if (!status.isLoggedIn) {
       navigate("/login");
     } else {
+      setBtn((prev) => true);
       const token = localStorage.getItem("loginToken");
       if (token) {
         axios
@@ -35,6 +37,7 @@ function ProductDetails() {
           )
           .then((res) => {
             alert(res.data.message);
+            setBtn((prev) => false);
           });
       }
     }
@@ -96,7 +99,9 @@ function ProductDetails() {
                       border: "none",
                       width: "100%",
                       height: "30px",
+                      cursor: btn ? "not-allowed" : "pointer",
                     }}
+                    disabled={btn}
                     onClick={handleAddtocart}
                   >
                     Add to Cart

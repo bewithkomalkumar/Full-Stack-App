@@ -12,10 +12,12 @@ function Register() {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
+  const [btn, setBtn] = useState(false);
 
   const registerUser = (event) => {
     event.preventDefault();
     // console.log(name, gender, email, password);
+    setBtn((prev) => true);
     axios
       .post("https://expensive-train-tuna.cyclic.app/auth/register", {
         name,
@@ -27,15 +29,17 @@ function Register() {
       })
       .then((res) => {
         alert("Registration Succesfull !");
+        setBtn((prev) => false);
         window.location.href = "/login";
       })
       .catch((err) => {
         alert(err.response.data.message);
+        setBtn((prev) => false);
       });
   };
   return (
     <div className="RegisterPage">
-      <h1>Registration Page</h1>
+      <h1>Registration Details</h1>
       <form className="RegistartionForm">
         <input
           type="text"
@@ -67,7 +71,19 @@ function Register() {
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
-        <button onClick={registerUser}>Submit</button>
+        <button
+          onClick={registerUser}
+          style={{
+            backgroundColor: "#58ac00",
+            border: "none",
+            color: "white",
+            marginTop: "10px",
+            cursor: btn ? "not-allowed" : "pointer",
+          }}
+          disabled={btn}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

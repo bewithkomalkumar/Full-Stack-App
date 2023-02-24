@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { toggleLoggedIn, makeUserName, changeUser_id } = useContext(myContext);
+  const [btn, setBtn] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("loginToken");
@@ -35,7 +36,8 @@ function Login() {
 
   const checkLogin = (event) => {
     event.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
+    setBtn((prev) => true);
     axios
       .post("https://expensive-train-tuna.cyclic.app/auth/login", {
         email,
@@ -47,10 +49,12 @@ function Login() {
           localStorage.setItem("loginToken", res.data.token);
           makeUserName(res.data.data.name, res.data.data);
           changeUser_id(res.data.data._id);
+          setBtn((prev) => false);
           toggleLoggedIn();
           // navigate(-1);
         } else {
           alert(res.data.message);
+          setBtn((prev) => false);
         }
       });
   };
@@ -68,7 +72,19 @@ function Login() {
           placeholder="Enter Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={checkLogin}>Login</button>
+        <button
+          onClick={checkLogin}
+          style={{
+            backgroundColor: "#58ac00",
+            border: "none",
+            color: "white",
+            marginTop: "10px",
+            cursor: btn ? "not-allowed" : "pointer",
+          }}
+          disabled={btn}
+        >
+          Login
+        </button>
       </form>
     </div>
   );

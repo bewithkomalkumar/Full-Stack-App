@@ -20,7 +20,7 @@ function Card({ data }) {
                 <p>{elem.discount} % off</p>
               </div>
               <Link to={`/productdetails/${elem._id}`}>
-                <button>View Product</button>
+                <button style={{ cursor: "pointer" }}>View Product</button>
               </Link>
             </div>
           );

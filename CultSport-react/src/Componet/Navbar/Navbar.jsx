@@ -52,15 +52,49 @@ function Navbar() {
             <Link to="/cart">
               <p>Cart</p>
             </Link>
-            <button onClick={Logout}>Logout</button>
+            <button
+              onClick={Logout}
+              style={{
+                background: "#f83e47",
+                border: "none",
+                color: "white",
+                padding: "5px 10px",
+                margin: "2px",
+                borderRadius: "5px",
+              }}
+            >
+              Logout
+            </button>
           </>
         ) : (
           <div>
             <Link to={"/login"}>
-              <button>Login</button>
+              <button
+                style={{
+                  background: "#58ac00",
+                  border: "none",
+                  color: "white",
+                  padding: "5px 10px",
+                  margin: "2px",
+                  borderRadius: "5px",
+                }}
+              >
+                Login
+              </button>
             </Link>
             <Link to={"/register"}>
-              <button>Sign up</button>
+              <button
+                style={{
+                  background: "#5c2499",
+                  border: "none",
+                  color: "white",
+                  padding: "5px 10px",
+                  margin: "2px",
+                  borderRadius: "5px",
+                }}
+              >
+                Sign up
+              </button>
             </Link>
           </div>
         )}

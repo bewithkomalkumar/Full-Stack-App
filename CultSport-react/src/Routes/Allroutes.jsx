@@ -12,6 +12,7 @@ import Cart from "../Pages/Cart";
 import ProductDetails from "../Pages/ProductDetails";
 import Payment from "../Pages/Payment";
 import PrivateForCart from "../Componet/PrivateRouter/PrivateForCart";
+import Footer from "../Componet/Footer/Footer";
 function Allroutes() {
   return (
     <div>
@@ -57,6 +58,8 @@ function Allroutes() {
         />
         <Route path="*" element={<Home />} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }

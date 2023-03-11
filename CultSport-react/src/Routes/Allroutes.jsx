@@ -58,7 +58,6 @@ function Allroutes() {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-
       <Footer />
     </div>
   );

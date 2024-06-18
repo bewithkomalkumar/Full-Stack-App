@@ -112,7 +112,7 @@ app.get("/product", async (req, res) => {
 });
 
 connectDatabase().then(
-  app.listen(3030, () => {
+  app.listen(process.env.PORT || 3030, () => {
     console.log("Server is Listening on http://localhost:3030");
   })
 );
